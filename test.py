@@ -6,9 +6,8 @@ import unittest
 
 from mock import Mock
 
-#from api import RecallsAPI
 import api
-
+from api import RecallsAPI
 
 def set_up_tests():
     """Cut down on boilerplate setup testing code."""
@@ -22,41 +21,42 @@ def called_url():
     return url
 
 
-#class TestRecallsAPI(unittest.TestCase):
+class TestRecallsAPI(unittest.TestCase):
 
-    #def setUp(self):
-        #set_up_tests()
+    def setUp(self):
+        set_up_tests()
 
-    #def test_base_url(self):
-        #example = RecallsAPI() 
-        #self.assertEquals(example.base_url,
-                #'http://search.usa.gov/search/recalls?')
+    def test_base_url(self):
+        example = RecallsAPI() 
+        self.assertEquals(example.base_url,
+                'http://search.usa.gov/search/recalls?')
 
 
-#class TestApiMethod(unittest.TestCase):
+class TestApiMethod(unittest.TestCase):
 
-    #def setUp(self):
-        #set_up_tests()
+    def setUp(self):
+        set_up_tests()
 
-    #def test_empty_api_method_fails(self):
-        #self.assertRaises(TypeError, RecallsAPI())
+    def test_empty_api_method_fails(self):
+        self.assertRaises(TypeError, RecallsAPI())
 
 
 class TestMethod_RecallsAPI(unittest.TestCase):
 
-    #def setUp(self):
-        #set_up_tests()
+    def setUp(self):
+        set_up_tests()
 
-    #def testmethod_startdate_enddate(self):
-        #RecallsAPI().search(startdate='2010-03-19', enddate='2010-03-19')
-        #url = called_url()
-        #expected_url = ('http://search.usa.gov/search/recalls?startdate=2010-03-19&enddate=2010-03-19&format=json')
-        #self.assertEquals(url, expected_url)
-
-    def testmethod_apikey(self):
-        api.RecallsAPI('my_testapikey').search(startdate='2010-03-19', enddate='2010-03-19')
+    def testmethod_startdate_enddate(self):
+        RecallsAPI().search(startdate='2010-03-19', enddate='2010-03-19')
         url = called_url()
-        expected_url = ('')
+        expected_url = ('http://search.usa.gov/search/recalls?startdate=2010-03-19&enddate=2010-03-19&format=json')
+        self.assertEquals(url, expected_url)
+
+    def testmethod_startdate_enddate_with_apikey(self):
+        api.RecallsAPI('a_test_api_key').search(startdate='2010-03-19', enddate='2010-03-19')
+        url = called_url()
+        expected_url = ('http://search.usa.gov/search/recalls?startdate='
+                        '2010-03-19&enddate=2010-03-19api_key=a_test_api_key&format=json')
         self.assertEquals(url, expected_url)
 
 if __name__ == '__main__':

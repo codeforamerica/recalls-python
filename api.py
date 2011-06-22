@@ -24,18 +24,15 @@ except ImportError:  # pragma: no cover
     from urllib.request import urlopen
 
 class RecallsAPI(object):
-    def __init__(self, api_key=None):
+    def __init__(self, api_key=''):
         self.api_key = api_key
-        #print 'self.api_key', self.api_key
         self.base_url = 'http://search.usa.gov/search/recalls?' 
 
     def _apicall(self, params):
-        if self.api_key is None:
-            print 'no api key :('
+        if not self.api_key:
             url = self.base_url + '%s&format=json' % \
                 (urlencode(params, True))
         else: 
-            print 'HAS API KEY!!!!'
             url = self.base_url + '%sapi_key=%s&format=json' % \
                 (urlencode(params, True), self.api_key)
         response = urlopen(url).read()
@@ -109,4 +106,4 @@ class RecallsAPI(object):
         Example: http://search.usa.gov/search/recalls?format=json&page=3
         >>> RecallsAPI().search(page='3')
         """
-        return RecallsAPI()._apicall(keywords)
+        return self._apicall(keywords)
