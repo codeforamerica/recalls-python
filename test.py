@@ -59,5 +59,12 @@ class TestMethod_RecallsAPI(unittest.TestCase):
                         '2010-03-19&enddate=2010-03-19api_key=a_test_api_key&format=json')
         self.assertEquals(url, expected_url)
 
+    def testmethod_query_with_weird_chars(self):
+        api.RecallsAPI().search(query='tires+"durability testing"')
+        url = called_url()
+        expected_url = ('http://search.usa.gov/search/recalls?query='
+                        'tires%2B%22durability+testing%22&format=json')
+        self.assertEquals(url, expected_url)
+
 if __name__ == '__main__':
     unittest.main()

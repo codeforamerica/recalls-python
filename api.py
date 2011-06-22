@@ -52,9 +52,13 @@ class RecallsAPI(object):
         Example: http://search.usa.gov/search/recalls?format=json
         ('format=json' is appended to URL by default by this wrapper)
 
-        query: keywords. Query terms for the search.
+        query: keywords. Query terms for the search. Add more terms to narrow
+        the search with spaces between terms; use "quotes for multi-word search
+        terms". (query='"CERTAIN PASSENGER VEHICLES"' gives different results
+        than query='CERTAIN PASSENGER VEHICLES')
         Example: http://search.usa.gov/search/recalls?query=tires&format=json
         >>> RecallsAPI().search(query='tires')
+        >>> RecallsAPI().search(query='tires "durability testing"')
 
         start_date: yyyy-mm-dd. Start date of the recall.
         Example: http://search.usa.gov/search/recalls?start_date=2010-01-01&end_date=2010-03-19&format=json
