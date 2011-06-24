@@ -45,7 +45,7 @@ class RecallsAPI(object):
         Parameters:
         api_key: your API key. You can get a key by signing up for an account.
         Example: http://search.usa.gov/search/recalls?api_key=9c63bbbfcd985314b245ef92ab37a792
-        >>> RecallsAPI().search(api_key='9c63bbbfcd985314b245ef92ab37a792')
+        >>> RecallsAPI(api_key='9c63bbbfcd985314b245ef92ab37a792').search(query='test')
 
         format: json. This parameter is required. The most recent recalls are 
         returned as the default if no other parameters are given.
